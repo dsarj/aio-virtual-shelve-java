@@ -1,10 +1,12 @@
 package com.aio.virtualshelve.dto;
 
-import lombok.Data;
-import org.springframework.stereotype.Component;
+import lombok.*;
 
-@Component
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class BookDto {
 
     private Long id;
