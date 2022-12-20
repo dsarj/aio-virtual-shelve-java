@@ -41,7 +41,7 @@ public class BookController {
         return ResponseEntity.ok(new BookDto());
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<BookDto> update(Long bookId, BookDto bookDto) {
         log.debug("init - BookController update");
         log.debug("finish - BookController update");
@@ -49,7 +49,7 @@ public class BookController {
     }
 
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<BookDto> delete(Long bookId, BookDto bookDto) {
         log.debug("init - BookController delete");
         log.debug("finish - BookController delete");
