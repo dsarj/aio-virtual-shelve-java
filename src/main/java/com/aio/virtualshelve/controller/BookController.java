@@ -1,7 +1,9 @@
 package com.aio.virtualshelve.controller;
 
 import com.aio.virtualshelve.dto.BookDto;
+import com.aio.virtualshelve.services.interfaces.BookService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/books")
 public class BookController {
 
+    @Autowired
+    BookService bookService;
+
     @GetMapping
     public ResponseEntity<BookDto> index() {
+        //  todo find all methods
         BookDto retorno = new BookDto();
         retorno.setName("A Caminhada");
         retorno.setAuthor("Davi o Grande");
@@ -37,8 +43,9 @@ public class BookController {
     @PostMapping
     public ResponseEntity<BookDto> save(BookDto bookDto) {
         log.debug("init - BookController save");
+        BookDto bookSavedDTO = bookService.save(bookDto);
         log.debug("finish - BookController save");
-        return ResponseEntity.ok(new BookDto());
+        return ResponseEntity.ok(bookSavedDTO);
     }
 
     @PutMapping("/{id}")
@@ -50,8 +57,10 @@ public class BookController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<BookDto> delete(Long bookId, BookDto bookDto) {
+    public ResponseEntity<BookDto> delete(Long bookId) {
         log.debug("init - BookController delete");
+        // todo buscar id
+        // dele
         log.debug("finish - BookController delete");
 
         return ResponseEntity.ok(new BookDto());

@@ -15,5 +15,4 @@ public class BookDto {
     private Long startYear;
     private Long finishYear;
     private Boolean queue;
-
 }
