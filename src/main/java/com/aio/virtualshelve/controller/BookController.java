@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 @RequestMapping("/books")
@@ -16,15 +18,10 @@ public class BookController {
     BookService bookService;
 
     @GetMapping
-    public ResponseEntity<BookDto> index() {
+    public ResponseEntity<List<BookDto>> index() {
         //  todo find all methods
-        BookDto retorno = new BookDto();
-        retorno.setName("A Caminhada");
-        retorno.setAuthor("Davi o Grande");
-        retorno.setStartYear(2021L);
-        retorno.setFinishYear(2022L);
-
-        return ResponseEntity.ok(retorno);
+        List<BookDto> bookDtoList = bookService.findAll();
+        return ResponseEntity.ok(bookDtoList);
     }
 
     @GetMapping("/{id}")
