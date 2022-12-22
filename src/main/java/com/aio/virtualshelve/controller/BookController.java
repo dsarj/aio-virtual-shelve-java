@@ -28,16 +28,11 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDto> getBookById(@PathVariable Long id) {
+    public ResponseEntity<BookDto> findById(@PathVariable Long id) {
         log.debug("init - BookController getBookById");
-        BookDto retorno = new BookDto();
-        retorno.setName("A Caminhada");
-        retorno.setAuthor("Davi o Grande");
-        retorno.setStartYear(2021L);
-        retorno.setFinishYear(2022L);
-
+        BookDto bookDto = bookService.findById(id);
         log.debug("finish - BookController getBookById");
-        return ResponseEntity.ok(retorno);
+        return ResponseEntity.ok(bookDto);
     }
 
     @PostMapping
@@ -59,7 +54,6 @@ public class BookController {
     @DeleteMapping("/{id}")
     public ResponseEntity<BookDto> delete(Long bookId) {
         log.debug("init - BookController delete");
-        // todo buscar id
         // dele
         log.debug("finish - BookController delete");
 

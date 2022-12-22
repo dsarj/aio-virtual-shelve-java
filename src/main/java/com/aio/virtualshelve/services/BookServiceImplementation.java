@@ -8,6 +8,8 @@ import com.aio.virtualshelve.services.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookServiceImplementation implements BookService {
 
@@ -20,5 +22,11 @@ public class BookServiceImplementation implements BookService {
         Book book = BookBuilder.dtoToEntity(bookDto);
         Book bookSaved = bookRepository.save(book);
         return BookBuilder.entityToDTO(bookSaved);
+    }
+
+    @Override
+    public BookDto findById(Long id) {
+        Optional<Book> book = bookRepository.findById(id);
+        return BookBuilder.entityToDTO(book.get()); //todo ver orelse throw
     }
 }

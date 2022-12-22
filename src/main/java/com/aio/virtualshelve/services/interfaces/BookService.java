@@ -8,4 +8,5 @@ public interface BookService {
 
     BookDto save(BookDto bookDto);
 
+    BookDto findById(Long id);
 }
