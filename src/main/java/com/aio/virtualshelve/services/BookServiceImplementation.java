@@ -8,15 +8,13 @@ import com.aio.virtualshelve.services.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookServiceImplementation implements BookService {
 
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     @Override
     public BookDto save(BookDto bookDto) {
@@ -24,21 +22,24 @@ public class BookServiceImplementation implements BookService {
         Book book = BookBuilder.dtoToEntity(bookDto);
         Book bookSaved = bookRepository.save(book);
         return BookBuilder.entityToDTO(bookSaved);
+//        return null;
     }
 
     @Override
     public BookDto findById(Long id) {
-        Optional<Book> book = bookRepository.findById(id);
-        return BookBuilder.entityToDTO(book.get()); //todo ver orelse throw
+//        Optional<Book> book = bookRepository.findById(id);
+//        return BookBuilder.entityToDTO(book.get()); //todo ver orelse throw
+        return BookBuilder.entityToDTO(Book.builder().id(1L).name("Misterio").build());
+//        return BookDto.builder().id(1L).name("Teste").build();
     }
 
     @Override
     public List<BookDto> findAll() {
-        List<Book> books = bookRepository.findAll(); // todo implement with some Sort
-        List<BookDto> booksDto = new ArrayList<>();
-        for(Book book: books) { // todo melhorar essa estrutura
-            booksDto.add(BookBuilder.entityToDTO(book));
-        }
-        return booksDto;
+//        List<Book> books = bookRepository.findAll(); // todo implement with some Sort
+//        List<BookDto> booksDto = new ArrayList<>();
+//        for(Book book: books) { // todo melhorar essa estrutura
+//            booksDto.add(BookBuilder.entityToDTO(book));
+//        }
+        return null;
     }
 }

@@ -15,7 +15,7 @@ public class  BookBuilder {
                 author(bookDto.getAuthor()).
                 startYear(bookDto.getStartYear()).
                 finishYear(bookDto.getFinishYear()).
-                queue(bookDto.getQueue()).build();
+                status(bookDto.getQueue()).build();
     }
 
     public static BookDto entityToDTO(Book book) {
@@ -25,7 +25,7 @@ public class  BookBuilder {
                 author(book.getAuthor()).
                 startYear(book.getStartYear()).
                 finishYear(book.getFinishYear()).
-                queue(book.getQueue()).build();
+                queue(book.getStatus()).build();
     }
 
 

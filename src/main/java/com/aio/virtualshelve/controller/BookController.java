@@ -11,13 +11,13 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/books")
+@RequestMapping(value = "/books")
 public class BookController {
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<BookDto>> index() {
         //  todo find all methods
         List<BookDto> bookDtoList = bookService.findAll();
