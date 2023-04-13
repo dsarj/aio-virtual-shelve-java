@@ -19,8 +19,9 @@ public class BookController {
 
     @GetMapping("/")
     public ResponseEntity<List<BookDto>> index() {
-        //  todo find all methods
+        log.debug("init - BookController findAll");
         List<BookDto> bookDtoList = bookService.findAll();
+        log.debug("finish - BookController findAll");
         return ResponseEntity.ok(bookDtoList);
     }
 
@@ -33,7 +34,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<BookDto> save(BookDto bookDto) {
+    public ResponseEntity<BookDto> save(@RequestBody BookDto bookDto) {
         log.debug("init - BookController save");
         BookDto bookSavedDTO = bookService.save(bookDto);
         log.debug("finish - BookController save");
@@ -41,7 +42,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookDto> update(Long bookId, BookDto bookDto) {
+    public ResponseEntity<BookDto> update(@PathVariable Long bookId, @RequestBody BookDto bookDto) {
         log.debug("init - BookController update");
         log.debug("finish - BookController update");
         return ResponseEntity.ok(new BookDto());

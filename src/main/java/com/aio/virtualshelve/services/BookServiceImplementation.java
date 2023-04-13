@@ -6,9 +6,12 @@ import com.aio.virtualshelve.model.Book;
 import com.aio.virtualshelve.repository.BookRepository;
 import com.aio.virtualshelve.services.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImplementation implements BookService {
@@ -17,29 +20,25 @@ public class BookServiceImplementation implements BookService {
     private BookRepository bookRepository;
 
     @Override
-    public BookDto save(BookDto bookDto) {
-        // todo validar campos
-        Book book = BookBuilder.dtoToEntity(bookDto);
-        Book bookSaved = bookRepository.save(book);
+    public BookDto save(final BookDto bookDto) {
+        final Book book = BookBuilder.dtoToEntity(bookDto);
+        final Book bookSaved = bookRepository.save(book);
         return BookBuilder.entityToDTO(bookSaved);
-//        return null;
     }
 
     @Override
-    public BookDto findById(Long id) {
-//        Optional<Book> book = bookRepository.findById(id);
-//        return BookBuilder.entityToDTO(book.get()); //todo ver orelse throw
-        return BookBuilder.entityToDTO(Book.builder().id(1L).name("Misterio").build());
-//        return BookDto.builder().id(1L).name("Teste").build();
+    public BookDto findById(final Long id) {
+        final Optional<Book> book = bookRepository.findById(id);
+        return book.map(BookBuilder::entityToDTO).orElseThrow();
     }
 
     @Override
     public List<BookDto> findAll() {
-//        List<Book> books = bookRepository.findAll(); // todo implement with some Sort
-//        List<BookDto> booksDto = new ArrayList<>();
-//        for(Book book: books) { // todo melhorar essa estrutura
-//            booksDto.add(BookBuilder.entityToDTO(book));
-//        }
-        return null;
+        final List<Book> books = bookRepository.findAll(Sort.by("id"));
+        final List<BookDto> bookDtoList = new ArrayList<>();
+        books.forEach(b -> {
+            bookDtoList.add(BookBuilder.entityToDTO(b));
+        });
+        return bookDtoList;
     }
 }

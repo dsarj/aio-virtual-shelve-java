@@ -2,9 +2,7 @@ package com.aio.virtualshelve.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @AllArgsConstructor
@@ -19,10 +17,10 @@ public class Book implements Serializable {
     private static final long serialVersionUID = 6012075650187699748L;
 
     @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String author;
     private Long startYear;
     private Long finishYear;
-    private Boolean status;
 }
