@@ -44,6 +44,7 @@ public class BookController {
     @PutMapping("/{id}")
     public ResponseEntity<BookDto> update(@PathVariable Long id, @RequestBody BookDto bookDto) {
         log.debug("init - BookController update");
+        BookDto bookSavedDTO = bookService.update(bookDto, id);
         log.debug("finish - BookController update");
         return ResponseEntity.ok(new BookDto());
     }

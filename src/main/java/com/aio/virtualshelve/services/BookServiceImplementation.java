@@ -41,4 +41,15 @@ public class BookServiceImplementation implements BookService {
         });
         return bookDtoList;
     }
+
+    @Override
+    public BookDto update(final BookDto bookDto, final Long id) {
+        final BookDto bookDtoUpdate = this.findById(id);
+        bookDtoUpdate.setName(bookDto.getName());
+        bookDtoUpdate.setAuthor(bookDto.getAuthor());
+        bookDtoUpdate.setStartYear(bookDto.getStartYear());
+        bookDtoUpdate.setFinishYear(bookDto.getFinishYear());
+        final Book bookUpdated = bookRepository.save(BookBuilder.dtoToEntity(bookDtoUpdate));
+        return BookBuilder.entityToDTO(bookUpdated);
+    }
 }
