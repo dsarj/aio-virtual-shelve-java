@@ -1,47 +1,61 @@
 package com.aio.virtualshelve.controller;
 
 import com.aio.virtualshelve.dto.BookDto;
+import com.aio.virtualshelve.services.interfaces.BookService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/books")
+@Slf4j
+@RequestMapping(value = "/books")
 public class BookController {
 
-    @GetMapping
-    public ResponseEntity<BookDto> index() {
-        BookDto retorno = new BookDto();
-        retorno.setName("A Caminhada");
-        retorno.setAuthor("Davi o Grande");
-        retorno.setStartYear(2021L);
-        retorno.setFinishYear(2022L);
+    @Autowired
+    private BookService bookService;
 
-        return ResponseEntity.ok(retorno);
+    @GetMapping("/")
+    public ResponseEntity<List<BookDto>> index() {
+        log.debug("init - BookController findAll");
+        List<BookDto> bookDtoList = bookService.findAll();
+        log.debug("finish - BookController findAll");
+        return ResponseEntity.ok(bookDtoList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDto> getBookById(@PathVariable Long id) {
-        BookDto retorno = new BookDto();
-        retorno.setName("A Caminhada");
-        retorno.setAuthor("Davi o Grande");
-        retorno.setStartYear(2021L);
-        retorno.setFinishYear(2022L);
-
-        return ResponseEntity.ok(retorno);
+    public ResponseEntity<BookDto> findById(@PathVariable Long id) {
+        log.debug("init - BookController getBookById");
+        BookDto bookDto = bookService.findById(id);
+        log.debug("finish - BookController getBookById");
+        return ResponseEntity.ok(bookDto);
     }
 
     @PostMapping
-    public ResponseEntity<BookDto> save(BookDto bookDto) {
+    public ResponseEntity<BookDto> save(@RequestBody BookDto bookDto) {
+        log.debug("init - BookController save");
+        BookDto bookSavedDTO = bookService.save(bookDto);
+        log.debug("finish - BookController save");
+        return ResponseEntity.ok(bookSavedDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BookDto> update(@PathVariable Long id, @RequestBody BookDto bookDto) {
+        log.debug("init - BookController update");
+        BookDto bookSavedDTO = bookService.update(bookDto, id);
+        log.debug("finish - BookController update");
         return ResponseEntity.ok(new BookDto());
     }
 
-    @PutMapping
-    public ResponseEntity<BookDto> update(Long bookId, BookDto bookDto) {
-        return ResponseEntity.ok(new BookDto());
-    }
 
-    @DeleteMapping
-    public ResponseEntity<BookDto> delete(Long bookId, BookDto bookDto) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<BookDto> delete(Long bookId) {
+        log.debug("init - BookController delete");
+        // dele
+        log.debug("finish - BookController delete");
+
         return ResponseEntity.ok(new BookDto());
     }
 
