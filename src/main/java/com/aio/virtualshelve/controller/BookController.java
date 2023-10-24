@@ -2,10 +2,7 @@ package com.aio.virtualshelve.controller;
 
 import com.aio.virtualshelve.dto.BookDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/books")
@@ -25,5 +22,12 @@ public class BookController {
         retorno.setPages("500");
 
         return ResponseEntity.ok(retorno);
+    }
+
+    @PostMapping
+    public ResponseEntity<BookDto> save(BookDto dto) {
+
+
+
     }
 }

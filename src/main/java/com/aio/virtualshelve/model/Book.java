@@ -1,9 +1,6 @@
 package com.aio.virtualshelve.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +9,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity(name = "TB_BOOK")
 public class Book implements Serializable {
 
@@ -24,6 +22,8 @@ public class Book implements Serializable {
     private Long startYear;
     @Column(name = "FINISH_YEAR")
     private Long finishYear;
+    @Column(name = "PAGES")
+    private Long pages;
     @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
     private Author author;
 
