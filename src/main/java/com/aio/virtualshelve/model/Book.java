@@ -1,19 +1,20 @@
 package com.aio.virtualshelve.model;
 
 import lombok.*;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 @Entity(name = "TB_BOOK")
 public class Book implements Serializable {
 
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @Column(name = "NAME")
@@ -24,7 +25,8 @@ public class Book implements Serializable {
     private Long finishYear;
     @Column(name = "PAGES")
     private Long pages;
-    @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "AUTHOR", referencedColumnName = "ID")
     private Author author;
 
 

@@ -1,9 +1,11 @@
 package com.aio.virtualshelve.service.impl;
 
 import com.aio.virtualshelve.builder.BookBuilder;
+import com.aio.virtualshelve.dto.AuthorDto;
 import com.aio.virtualshelve.dto.BookDto;
 import com.aio.virtualshelve.model.Book;
 import com.aio.virtualshelve.repository.BookRepository;
+import com.aio.virtualshelve.service.AuthorService;
 import com.aio.virtualshelve.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     BookRepository repository;
+
+    @Autowired
+    AuthorService authorService;
 
 
 
